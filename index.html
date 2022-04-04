@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free WifiSpot</title>
+  <style>
+    @font-face {
+      font-family: "Roboto Round";
+      src: url("font/Roboto-Round-Regular.eot");
+      src: url("font/Roboto-Round-Regular.eot?#iefix") format("embedded-opentype"),
+          url("font/Roboto-Round-Regular.woff2") format("woff2"),
+          url("font/Roboto-Round-Regular.woff") format("woff"),
+          url("font/Roboto-Round-Regular.ttf") format("truetype"),
+          url("font/Roboto-Round-Regular.svg#Roboto-Round-Regular") format("svg");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    body {
+      font-family: "Roboto Round", sans-serif;
+      font-size: 16px;
+      background-color: #333;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    h2 {
+      margin: 0;
+      padding: 0;
+      font-size: 2em;
+    }
+
+    button {
+      margin-bottom: 1em;
+      margin-top: 1em;
+    }
+
+    #terms {
+      color: #ccc;
+    }
+
+    button {
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      /* green */
+      background-color: #4CAF50;
+      color: #fff;
+      font-size: 1.1em;
+    }
+    video {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+  </style>
+</head>
+<body>
+  <img src="wifi.png" alt="" width="180px">
+  <h2>Free WifiSpot</h2>
+  <span>Willkommen zu Free WifiSpot - einem Wifi-Spot, der dir die Freiheit im Internet garantiert.</span>
+  <span id="line-last">Klicke einfach auf den Button, um dich mit dem Wifi-Spot zu verbinden.</span>
+  <button>Verbinden</button>
+  <video src="rickroll.mkv" width="500px" style="display: none;"></video>
+  <span id="terms">Beim verbinden mit dem Free WifiSpot stimmst du unseren <a>Nutzungsbedingungen</a> zu.</span>
+
+
+  <script>
+    const video = document.querySelector('video');
+    function play() {
+      video.style.display = "";
+      video.play();
+      document.querySelector("span").innerText = "Willkommen zu Free WifiSpot - einem Wifi-Spot, der dich rickrollt.";
+      document.querySelector("#line-last").innerText = "Klicke einfach auf den Button, um dich rickrollen zu lassen.";
+      document.querySelector("#terms").innerText = "Beim verbinden mit dem Free WifiSpot stimmst du zu gerickrollt zu werden.";
+      document.querySelector("button").style.display = "none";
+    }
+    document.querySelector('button').addEventListener('click', play);
+    document.querySelector('a').addEventListener('click', play);
+  </script>
+</body>
+</html>
