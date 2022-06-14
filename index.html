@@ -22,7 +22,7 @@
     body {
       font-family: "Roboto Round", sans-serif;
       font-size: 16px;
-      background-color: #333;
+      background-color: #1d1d1d;
       color: #fff;
       margin: 0;
       padding: 0;
@@ -31,6 +31,10 @@
       justify-content: center;
       flex-direction: column;
     }
+
+		a {
+			color: #3E84D1;
+		}
 
     h2 {
       margin: 0;
@@ -60,24 +64,93 @@
       margin-top: 1em;
       margin-bottom: 1em;
     }
+
+		@keyframes spinner {
+			0% {
+				stroke-dasharray: 0% 275%;
+				transform: rotate(-90deg);
+			}
+
+			50% {
+				transform: rotate(360deg);
+				stroke-dasharray: 137.5% 137.5%;
+			}
+
+			100% {
+				stroke-dasharray: 0% 275%;
+				transform: rotate(990deg);
+			}
+		}
+
+		.spinner {
+			width: 30px;
+			height: 30px;
+		}
+
+		.spinner > .ring {
+			width: 100%;
+			height: 100%;
+		}
+
+		.spinner > .ring > .dynamic {
+			-webkit-animation: spinner 2s linear infinite;
+			-moz-animation: spinner 2s linear infinite;
+			-o-animation: spinner 2s linear infinite;
+			animation: spinner 2s linear infinite;
+			fill: none;
+			-webkit-transform: rotate(-90deg);
+			-moz-transform: rotate(-90deg);
+			-o-transform: rotate(-90deg);
+			transform: rotate(-90deg);
+			-webkit-transition: all 0.2s ease-in-out;
+			-moz-transition: all 0.2s ease-in-out;
+			-o-transition: all 0.2s ease-in-out;
+			transition: all 0.2s ease-in-out;
+			stroke-width: 12.5%;
+			stroke-linecap: round;
+			-webkit-transform-origin: 50% 50%;
+			-moz-transform-origin: 50% 50%;
+			-o-transform-origin: 50% 50%;
+			transform-origin: 50% 50%;
+			height: 100%;
+			border-radius: 50%;
+			stroke: #0064ffff;
+		}
+
+		button {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+		}
   </style>
 </head>
 <body>
   <img src="wifi.png" alt="" width="180px">
   <h2>Free WifiSpot</h2>
-  <span>Willkommen zu Free WifiSpot - einem Wifi-Spot, der dir die Freiheit im Internet garantiert.</span>
+  <span>Willkommen zu Free WifiSpot - das WLAN, das dir die Freiheit im Internet garantiert.</span>
   <span id="line-last">Klicke einfach auf den Button, um dich mit dem Wifi-Spot zu verbinden.</span>
-  <button>Verbinden</button>
+  <button>
+		<div class="spinner" style="display: none;">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="ring">
+				<circle class="dynamic" cx="50%" cy="50%" r="43.75%"></circle>
+			</svg>
+		</div>
+		<span id="btn-text">Verbinden</span>
+	</button>
   <video src="rickroll.mkv" width="500px" style="display: none;"></video>
   <span id="terms">Beim verbinden mit dem Free WifiSpot stimmst du unseren <a>Nutzungsbedingungen</a> zu.</span>
 
 
   <script>
     const video = document.querySelector('video');
-    function play() {
+		function sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms))}
+    async function play() {
+			document.querySelector("#btn-text").style.display = "none";
+			document.querySelector(".spinner").style.display = "";
+			await sleep(Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000);
       video.style.display = "";
       video.play();
-      document.querySelector("span").innerText = "Willkommen zu Free WifiSpot - einem Wifi-Spot, der dich rickrollt.";
+      document.querySelector("span").innerText = "Willkommen zu Free WifiSpot - das WLAN, das dich rickrollt.";
       document.querySelector("#line-last").innerText = "Klicke einfach auf den Button, um dich rickrollen zu lassen.";
       document.querySelector("#terms").innerText = "Beim verbinden mit dem Free WifiSpot stimmst du zu gerickrollt zu werden.";
       document.querySelector("button").style.display = "none";
